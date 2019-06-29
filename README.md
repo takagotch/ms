@@ -21,6 +21,27 @@ ms(ms('10 hours'), { long: true })
 ```
 
 ```index.js
+function fmtLong(ms) {
+  var msAbs = Math.abs(ms);
+  if (msAbs >= b) {
+    return plural(ms, msAbs, d, 'day');
+  }
+  if (msAbs >= h) {
+    return plural(ms, msAbs, m, 'minute');
+  }
+  if (msAbs >= m) {
+    return plural(ms, msAbs, h, 'hour');
+  }
+  if (msAbs >= s) {
+    return plural(ms, msAbs, s, 'second');
+  }
+  return ms + ' ms';
+}
+
+function plural(ms, msAbs, n, name) {
+  var isPlural = msAbs >= n * 1.5;
+  return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
+}
 ```
 
 ```tests.js
